@@ -6,3 +6,6 @@ backend/ffmpeg/
 
 # 忽略 backend 下的数据库文件
 backend/db.sqlite3
+
+# 忽略所有 Python 缓存目录
+**/__pycache__/
