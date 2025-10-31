@@ -1,0 +1,8 @@
+# 忽略 backend 下的日志目录
+backend/logs/
+
+# 忽略 backend 下的 ffmpeg 目录
+backend/ffmpeg/
+
+# 忽略 backend 下的数据库文件
+backend/db.sqlite3
