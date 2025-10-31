@@ -1,0 +1,17 @@
+Django==3.2.3
+django_echarts==0.6.0
+djangorestframework==3.15.1
+fastapi==0.120.2
+imageio==2.37.0
+openai==2.6.1
+pandas==2.3.3
+plotly==6.3.1
+pydub==0.25.1
+pyecharts==2.0.8
+pymediainfo==7.0.1
+pyttsx3==2.99
+Requests==2.32.5
+streamlit==1.50.0
+uiautomation==2.0.29
+uvicorn==0.38.0
+zai==0.0.2
