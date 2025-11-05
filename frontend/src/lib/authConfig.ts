@@ -6,27 +6,27 @@
 // 认证API端点配置
 export const authApiConfig = {
   login: {
-    url: 'http://192.168.42.175:8000/login/',
+    url: 'http://127.0.0.1:8000/login/',
     method: 'POST',
     timeoutMs: 600000, // 10分钟
   },
   register: {
-    url: 'http://192.168.42.175:8000/registerapi/',
+    url: 'http://127.0.0.1:8000/registerapi/',
     method: 'POST',
     timeoutMs: 600000, // 10分钟
   },
   logout: {
-    url: 'http://192.168.42.175:8000/logout/',
+    url: 'http://127.0.0.1:8000/logout/',
     method: 'POST',
     timeoutMs: 600000, // 10分钟
   },
   updateEvaluation: {
-    url: 'http://192.168.42.175:8000/update_evaluation/',
+    url: 'http://127.0.0.1:8000/update_evaluation/',
     method: 'POST',
     timeoutMs: 600000, // 10分钟
   },
   editAction: {
-    url: 'http://192.168.42.175:8000/edit_action/',
+    url: 'http://127.0.0.1:8000/edit_action/',
     method: 'POST',
     timeoutMs: 600000, // 10分钟
   },

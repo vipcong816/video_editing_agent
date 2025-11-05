@@ -1,22 +1,22 @@
 # 项目部署与使用说明
 
-本项目集成了 LLM 服务和 Django 后台管理系统，用于剪辑任务管理和操作。
+本项目集成了 **剪辑任务管理系统**、**智能体服务（xiaohongshu-mcp）** 与 **n8n 自动化流程**，用于统一管理用户需求、剪辑师任务及智能创作流程。
 
 ---
 
 ## 1. 环境准备
 
-确保已安装：
+请确保已安装：
 
-- Python 3.x  
-- pip（Python 包管理器）  
-- Django 相关依赖  
+- **Python 3.x**  
+- **pip**（Python 包管理器）  
+- **Django 相关依赖**
 
 ---
 
 ## 2. 安装依赖
 
-在项目根目录下执行：
+在项目根目录执行：
 
 ```bash
 pip install -r requirements.txt
@@ -24,36 +24,36 @@ pip install -r requirements.txt
 
 ---
 
-## 3. 配置 API Key
+## 3. n8n 模型与 API Key 配置
 
-本项目使用 `zhipuai` / BIGMODEL API，需要配置 API Key。
+本项目使用的 **大模型服务（zhipuai / BIGMODEL）** 在 **n8n 工作流中配置**，  
+无需在系统环境中设置 API Key。
 
-### Windows（PowerShell）
+### 配置步骤
 
-```powershell
-setx BIGMODEL_API_KEY "你的API_KEY"
-```
+1. 打开 n8n 编辑界面。  
+2. 导入工作流文件：`n8n/xiaohongshuwebhook.json`。  
+3. 在 **Model** 节点中填写你的 **BIGMODEL API Key**。  
+4. 保存并激活工作流。
 
-### macOS / Linux（bash/zsh）
-
-```bash
-export BIGMODEL_API_KEY="你的API_KEY"
-```
-
-> 配置完成后，请重新打开终端窗口或运行 `source ~/.bashrc` 以使配置生效。  
-> 可用以下命令检查环境变量是否生效：  
-> - Linux/macOS: `echo $BIGMODEL_API_KEY`  
-> - Windows PowerShell: `$env:BIGMODEL_API_KEY`
+> **注意：** API Key 仅在 n8n 中使用，不需设置系统环境变量。
 
 ---
 
-## 4. 启动 LLM 服务
+## 4. 智能体与自动化服务
 
-```bash
-python llmserver.py
-```
+本项目使用以下智能体与自动化流程：
 
-> 确保 API Key 已正确配置，服务启动后可处理 LLM 请求。
+### 4.1 智能体：xiaohongshu-mcp  
+项目地址：[xpzouying/xiaohongshu-mcp](https://github.com/xpzouying/xiaohongshu-mcp)
+
+该智能体用于生成小红书内容草稿、标题与图片描述，辅助剪辑师进行创作。
+
+### 4.2 n8n 自动化流程  
+目录：`n8n/xiaohongshuwebhook.json`  
+该流程通过 Webhook 实现用户请求接收与内容生成自动化。
+
+![n8n 自动化流程图](docs/xiaohongshun8n.png)
 
 ---
 
@@ -65,11 +65,11 @@ python llmserver.py
 python manage.py createsuperuser
 ```
 
-按提示输入用户名、邮箱和密码。
+根据提示输入用户名、邮箱和密码。
 
 ### 创建剪辑师用户及角色
 
-通过 Django 管理后台或管理命令创建以下角色：
+可通过 Django 后台或命令行创建以下角色：
 
 - `superuser`（管理员）  
 - `editor`（剪辑师）
@@ -85,98 +85,93 @@ python manage.py runserver 0.0.0.0:8000
 访问方式：
 
 - 本机访问：`http://localhost:8000`  
-- 局域网访问：`http://<服务器IP>:8000`  
+- 局域网访问：`http://<服务器IP>:8000`
+
+后台管理界面：  
+[http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
 
 ---
 
-## 7. 项目目录结构示例
+## 7. 本地开发（前端部署）
 
+### 环境准备
+
+- 安装 [Node.js](https://nodejs.org/en)
+- 安装 [pnpm](https://pnpm.io/installation)
+
+### 操作步骤
+
+- 安装依赖
+
+```sh
+pnpm install
 ```
-project/
-│
-├─ llmserver.py         # LLM 服务入口
-├─ manage.py            # Django 管理命令
-├─ requirements.txt     # Python 依赖
-├─ loghelper.py         # 日志工具
-├─ docs/
-│   └─ images/          # 图片目录
-├─ logs/                # 日志目录
-└─ README.md            # 项目说明
+
+- 启动 Dev Server
+
+```sh
+pnpm run dev
 ```
+
+- 在浏览器访问：  
+  [http://localhost:3000](http://localhost:3000)
 
 ---
 
 ## 8. 功能示意图
 
-### 8.1 剪辑智能体封面
+### 8.1 智能体界面  
+![智能体界面](docs/xiaohongshu.png)
 
-![剪辑智能体封面](docs/images/agent_cover.png)
+### 8.2 n8n 自动化流程  
+![n8n 自动化流程](docs/xiaohongshun8n.png)
 
-### 8.2 用户提交需求界面
-
-![用户提交需求](docs/images/user_submit.png)
-
-### 8.3 剪辑师处理需求界面
-
-![剪辑师处理需求](docs/images/editor_process.png)
+### 8.3 管理员界面（Django Admin）  
+- **数据分析**  
+  ![数据分析](docs/jianjichart.png)  
+- **需求内容管理**  
+  ![需求内容](docs/table.png)  
+- **用户管理**  
+  ![用户管理](docs/yh.png)
 
 ---
 
 ## 9. 常见问题
 
-- **API Key 配置无效**  
-  检查环境变量是否生效，并确保终端已重启。
+- **n8n 无法访问或未启动**  
+  请确认 n8n 服务已运行，并确保 `xiaohongshuwebhook.json` 已导入且激活。  
 
-- **Django 服务无法启动**  
-  检查端口是否被占用，或使用其他端口：
+- **Model 节点报错或无法调用**  
+  检查 n8n 的模型节点中是否填写正确的 API Key。  
+
+- **Django 启动失败**  
+  检查端口占用情况，可换端口：  
   ```bash
   python manage.py runserver 0.0.0.0:<端口号>
   ```
 
 - **依赖安装失败**  
-  尝试升级 pip：
+  尝试升级 pip：  
   ```bash
   pip install --upgrade pip
   ```
 
-- **LLM 服务无法访问**  
-  确认 `llmserver.py` 已启动并监听正确端口。
-
 ---
 
-## 10. 一键部署示例（可选）
+## 10. 一键部署脚本（可选）
 
-在 Linux/macOS 可创建 `deploy.sh`：
+### Linux / macOS: `deploy.sh`
 
 ```bash
 #!/bin/bash
-
-# 安装依赖
 pip install -r requirements.txt
-
-# 配置 API Key
-export BIGMODEL_API_KEY="你的API_KEY"
-
-# 启动 LLM 服务
-python llmserver.py &
-
-# 启动 Django 服务
 python manage.py runserver 0.0.0.0:8000
 ```
 
-Windows 可创建 `deploy.ps1`：
+### Windows: `deploy.ps1`
 
 ```powershell
-# 安装依赖
 pip install -r requirements.txt
-
-# 配置 API Key
-setx BIGMODEL_API_KEY "你的API_KEY"
-
-# 启动 LLM 服务
-Start-Process python llmserver.py
-
-# 启动 Django 服务
 Start-Process python manage.py runserver 0.0.0.0:8000
 ```
 
@@ -185,4 +180,6 @@ Start-Process python manage.py runserver 0.0.0.0:8000
 ## 11. 参考文档
 
 - [Django 官方文档](https://docs.djangoproject.com/)  
-- [zhipuai /]()
+- [xiaohongshu-mcp 项目](https://github.com/xpzouying/xiaohongshu-mcp)  
+- [n8n 官方文档](https://docs.n8n.io)  
+- [pnpm 官方文档](https://pnpm.io/)

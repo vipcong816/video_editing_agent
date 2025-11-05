@@ -59,17 +59,31 @@ const processMarkdownContent = (content: string): string => {
   return processed;
 };
 
-// 格式化消息历史为API需要的格式，最多保留三轮对话
-const formatMessagesForAPI = (messages: Message[]): Array<{ role: string; content: string }> => {
-  // 最多保留三轮对话（每轮包含用户和助手的消息）
-  const maxMessages = 6; // 3轮对话 * 2条消息/轮
-  const recentMessages = messages.slice(-maxMessages);
-  
-  return recentMessages.map(msg => ({
-    role: msg.sender === 'user' ? 'user' : 'assistant',
-    content: msg.content
-  }));
-};
+  // 格式化消息历史为API需要的格式，最多保留三轮对话
+  const formatMessagesForAPI = (messages: Message[]): Array<{ role: string; content: string }> => {
+    // 最多保留三轮对话（每轮包含用户和助手的消息）
+    const maxMessages = 6; // 3轮对话 * 2条消息/轮
+    const recentMessages = messages.slice(-maxMessages);
+    
+    return recentMessages.map(msg => ({
+      role: msg.sender === 'user' ? 'user' : 'assistant',
+      content: msg.content
+    }));
+  };
+
+   // 为小红书MCP智能体特殊处理消息格式
+  const formatXiaohongshuMessage = (message: string, agentId: string): string => {
+    // 如果是小红书MCP智能体，确保消息格式正确
+    if (agentId === 'agent-xiaohongshu') {
+      // 如果消息已经包含"xiaohongshu-mcp"，则直接返回
+      if (message.includes('xiaohongshu-mcp')) {
+        return message;
+      }
+      // 否则添加必要的前缀
+      return message;
+    }
+    return message;
+  };
 
 // 智能体聊天页面组件
 export default function Chat() {
@@ -242,6 +256,12 @@ export default function Chat() {
           } else {
             // 普通聊天智能体
             requestBody = JSON.stringify({ messages: messagesHistory });
+            
+            // 为小红书MCP智能体特殊处理请求
+            if (agentConfig.id === 'agent-xiaohongshu') {
+              // 使用指定的请求格式
+              requestBody = JSON.stringify({ message: "查看登录情况使用 xiaohongshu-mcp。" });
+            }
           }
       }
       
@@ -352,20 +372,37 @@ export default function Chat() {
           break;
           
         case 'synchronous':
-          // 处理同步API响应
-          const data = await response.json();
+           // 处理同步API响应
+           const data = await response.json();
+           
+           // 处理小红书MCP智能体的特殊响应格式
+           if (agentConfig.id === 'agent-xiaohongshu') {
+             // 直接使用output字段作为内容
+             const content = data.output || '抱歉，没有收到有效的响应。';
+             
+             // 更新消息
+             setMessages(prev => 
+               prev.map(msg => 
+                 msg.id === aiMessageId 
+                   ? { ...msg, content, isStreaming: false } 
+                   : msg
+               )
+             );
+           } else {
+             // 处理普通同步响应
+             const content = data.response || '抱歉，没有收到有效的响应。';
+             
+             // 更新消息
+             setMessages(prev => 
+               prev.map(msg => 
+                 msg.id === aiMessageId 
+                   ? { ...msg, content, isStreaming: false } 
+                   : msg
+               )
+             );
+           }
           
-          // 处理普通同步响应
-          const content = data.response || '抱歉，没有收到有效的响应。';
-          
-          // 直接更新完整响应
-          setMessages(prev => 
-            prev.map(msg => 
-              msg.id === aiMessageId 
-                ? { ...msg, content, isStreaming: false } 
-                : msg
-            )
-          );
+
           break;
           
         case 'streaming':

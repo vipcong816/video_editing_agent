@@ -9,4 +9,9 @@ backend/db.sqlite3
 
 # 忽略所有 Python 缓存目录
 # 忽略 backend 下所有层级的 Python 缓存目录
-backend/**/__pycache__/
+backend/django_auth_example/__pycache__/
+backend/users/__pycache__/
+
+
+
+frontend/node_modules
