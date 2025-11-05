@@ -9,28 +9,15 @@ interface AgentProps {
   creator: string;
   views: string;
   avatar: string;
-  externalUrl?: string;
 }
 
 const AgentCard: React.FC<AgentProps> = ({ 
-  id, name, description, creator, views, avatar, externalUrl
+  id, name, description, creator, views, avatar
 }) => {
-  // 处理点击事件
-  const handleClick = (e: React.MouseEvent) => {
-    if (externalUrl) {
-      e.preventDefault(); // 阻止默认的Link行为
-      window.open(externalUrl, '_blank', 'noopener,noreferrer'); // 打开新窗口
-    }
-  };
-
   return (
     <Link 
-      to={externalUrl ? "#" : `/user-space/${id}`}
-      onClick={handleClick}
-      className={cn(
-        "bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700",
-        externalUrl ? "cursor-pointer" : ""
-      )}
+      to={`/user-space/${id}`}
+      className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700 cursor-pointer"
     >
       <div className="flex flex-col items-center text-center">
         <div className="w-16 h-16 rounded-full overflow-hidden mb-3 border-2 border-gray-100 dark:border-gray-700">
@@ -46,13 +33,6 @@ const AgentCard: React.FC<AgentProps> = ({
           <span>{creator}</span>
           <span>{views}</span>
         </div>
-        
-        {/* 显示外部链接图标 */}
-        {externalUrl && (
-          <div className="absolute top-2 right-2">
-            <i className="fas fa-external-link-alt text-gray-400 text-xs"></i>
-          </div>
-        )}
       </div>
     </Link>
   );
