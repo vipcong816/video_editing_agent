@@ -134,6 +134,13 @@ pnpm run dev
 - **用户管理**  
   ![用户管理](docs/yh.png)
 
+### 8.4 主界面  
+- **主页**  
+  ![主页](docs/agent_cover.png)  
+- **用户提交需求**  
+  ![用户提交需求](docs/user_submit.png)  
+- **工作人员确认需求**  
+  ![工作人员确认需求](docs/editor_process.png)
 ---
 
 ## 9. 常见问题
