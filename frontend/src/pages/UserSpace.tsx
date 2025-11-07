@@ -209,9 +209,9 @@ export default function Chat() {
       const apiUrl = agentConfig.server.url || 'https://faoz1548337.vicp.fun/chat';
       
       // 为不同媒体类型设置不同的超时时间
-      const timeoutMs = agentConfig.response.type === 'media' && mediaType === 'video' 
-        ? 600000 // 视频生成设为10分钟
-        : agentConfig.server.timeoutMs || 30000; // 其他情况设为30秒或配置的值
+  const timeoutMs = agentConfig.response.type === 'media' && mediaType === 'video' 
+    ? 600000 // 视频生成设为10分钟
+    : agentConfig.server.timeoutMs || 600000; // 其他情况设为10分钟或配置的值
       
       // 创建超时Promise
       const timeoutPromise = new Promise((_, reject) => {
@@ -257,11 +257,11 @@ export default function Chat() {
             // 普通聊天智能体
             requestBody = JSON.stringify({ messages: messagesHistory });
             
-            // 为小红书MCP智能体特殊处理请求
-            if (agentConfig.id === 'agent-xiaohongshu') {
-              // 使用指定的请求格式
-              requestBody = JSON.stringify({ message: "查看登录情况使用 xiaohongshu-mcp。" });
-            }
+              // 为小红书MCP智能体特殊处理请求
+              if (agentConfig.id === 'agent-xiaohongshu') {
+                // 使用用户输入的内容作为消息
+                requestBody = JSON.stringify({ message: userInput });
+              }
           }
       }
       

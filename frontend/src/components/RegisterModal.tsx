@@ -56,7 +56,7 @@ const RegisterModal: React.FC<{
            email,
            group
          }),
-         signal: AbortSignal.timeout(authApiConfig.register.timeoutMs)
+  signal: AbortSignal.timeout(600000) // 设置请求超时为10分钟
        });
 
       if (!response.ok) {

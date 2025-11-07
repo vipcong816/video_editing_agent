@@ -23,7 +23,7 @@ const Header: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        signal: AbortSignal.timeout(authApiConfig.logout.timeoutMs) // 设置请求超时
+  signal: AbortSignal.timeout(600000) // 设置请求超时为10分钟
       });
       
       if (!response.ok) {

@@ -44,7 +44,7 @@ const LoginModal: React.FC<{
                     username,
                     password
                 }),
-                signal: AbortSignal.timeout(authApiConfig.login.timeoutMs)
+  signal: AbortSignal.timeout(600000) // 设置请求超时为10分钟
             });
 
             if (!response.ok) {

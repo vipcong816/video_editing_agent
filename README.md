@@ -32,7 +32,7 @@ pip install -r requirements.txt
 ### 配置步骤
 
 1. 打开 n8n 编辑界面。  
-2. 导入工作流文件：`n8n/xiaohongshuwebhook.json`。  
+2. 导入工作流文件：`n8n/dymcp.json`。  
 3. 在 **Model** 节点中填写你的 **BIGMODEL API Key**。  
 4. 保存并激活工作流。
 
@@ -44,16 +44,18 @@ pip install -r requirements.txt
 
 本项目使用以下智能体与自动化流程：
 
-### 4.1 智能体：xiaohongshu-mcp  
-项目地址：[xpzouying/xiaohongshu-mcp](https://github.com/xpzouying/xiaohongshu-mcp)
+### 4.1 智能体：dymcp  
 
-该智能体用于生成小红书内容草稿、标题与图片描述，辅助剪辑师进行创作。
-
+该智能体用于下载抖音视频。
+mcp运行
+```bash
+python douyinmcp.py
+```
 ### 4.2 n8n 自动化流程  
-目录：`n8n/xiaohongshuwebhook.json`  
+目录：`n8n/dymcp.json`  
 该流程通过 Webhook 实现用户请求接收与内容生成自动化。
 
-![n8n 自动化流程图](docs/xiaohongshun8n.png)
+![n8n 自动化流程图](docs/dymcp.png)
 
 ---
 

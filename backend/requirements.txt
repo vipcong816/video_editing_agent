@@ -17,3 +17,4 @@ uvicorn==0.38.0
 zai==0.0.2
 django-simpleui
 django-cors-headers
+fastmcp
