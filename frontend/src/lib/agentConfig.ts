@@ -56,23 +56,23 @@ export const agentConfigs: AgentConfig[] = [
   // },
   {
     id: 'agent-xiaohongshu',
-    name: '小红书mcp',
-    description: '小红书智能助手，帮您管理小红书账号和内容',
+    name: '抖音视频下载',
+    description: '抖音视频下载智能助手，帮您下载抖音视频内容',
     creator: '平台技术团队',
     views: '1234',
     avatar: 'https://space.coze.cn/api/coze_space/gen_image?image_size=square&prompt=Xiaohongshu%20social%20media%20platform%20icon%20with%20red%20color%20theme&sign=761b8c71f4b280d179dcee39d492dcaa',
     server: {
-      url: 'http://127.0.0.1:5678/webhook/bf2365d6-fd8d-48d9-9f38-5afce0034df9',
+      url: 'http://localhost:5678/webhook/92bfdbbe-9135-4792-97fd-c26a5c65978b',
       method: 'POST',
-      timeoutMs: 30000
+      timeoutMs: 600000
     },
     response: {
       type: 'synchronous',
       supportsImageUpload: false
     },
     ui: {
-      placeholder: '请输入命令，例如"查看登录情况使用 xiaohongshu-mcp"',
-      welcomeMessage: '欢迎使用小红书智能助手！您可以使用我来管理您的小红书账号和内容。'
+      placeholder: '请输入命令，例如"下载分享连接的视频：XXXXX"',
+      welcomeMessage: '抖音视频下载智能助手，帮您下载抖音视频内容'
     }
   },
   // {
