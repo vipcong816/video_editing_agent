@@ -11,19 +11,6 @@ export const popularAgents = agentConfigs.map(config => ({
   externalUrl: config.externalUrl
 }));
 
-// 只保留自动剪辑智能体
-export const trendingAgents = agentConfigs
-  .filter(config => config.name === '自动剪辑')
-  .map(config => ({
-    id: config.id,
-    name: config.name,
-    description: config.description,
-    creator: config.creator,
-    views: config.views,
-    avatar: config.avatar,
-    externalUrl: config.externalUrl
-  }));
-
 // 所有智能体数据
 export const agentData = [...popularAgents];
 
@@ -34,8 +21,8 @@ export const aiAssistants = agentConfigs.map(config => ({
   avatar: config.avatar
 }));
 
-// 功能标签
+// 功能标签 - 更广泛的应用场景
 export const functionTags = [
-  'PPT制作', '语音创作', 'AI搜索', '数学设计', '学习研究',
-  '市场调研', '办公写作', '网站开发', '自媒体创作', '营销策划',
+  '智能助手', '内容创作', '数据分析', '学习辅导', '工作效率',
+  '创意设计', '语音交互', '图像识别', '知识问答', '生活服务',
 ];

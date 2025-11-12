@@ -1,6 +1,6 @@
 # 项目部署与使用说明
 
-本项目集成了 **剪辑任务管理系统**、**智能体服务** 与 **n8n 自动化流程**，用于统一管理用户需求、剪辑师任务及智能创作流程。
+本项目集成了 **任务管理系统**、**智能体服务** 与 **n8n 自动化流程**，用于统一管理用户需求、人工任务及智能创作流程。
 
 ---
 
@@ -32,7 +32,7 @@ pip install -r requirements.txt
 ### 配置步骤
 
 1. 打开 n8n 编辑界面。  
-2. 导入工作流文件：`n8n/dymcp.json`。  
+2. 导入工作流文件（示例）：`n8n/dymcp.json`。  
 3. 在 **Model** 节点中填写你的 **BIGMODEL API Key**。  
 4. 保存并激活工作流。
 
@@ -69,12 +69,12 @@ python manage.py createsuperuser
 
 根据提示输入用户名、邮箱和密码。
 
-### 创建剪辑师用户及角色
+### 创建人工用户及角色
 
 可通过 Django 后台或命令行创建以下角色：
 
 - `superuser`（管理员）  
-- `editor`（剪辑师）
+- `editor`（人工）
 
 ---
 
@@ -100,6 +100,38 @@ python manage.py runserver 0.0.0.0:8000
 
 - 安装 [Node.js](https://nodejs.org/en)
 - 安装 [pnpm](https://pnpm.io/installation)
+
+### 智能体添加
+
+- `frontend\src\lib\agentConfig.ts`（配置位置，按需添加）  
+
+```sh
+// 所有智能体的配置数组
+export const agentConfigs: AgentConfig[] = [
+  {
+    id: 'agent-1',
+    name: '抖音视频下载',
+    description: '抖音视频下载智能助手，帮您下载抖音视频内容',
+    creator: '平台技术团队',
+    views: '1234',
+    avatar: 'XXXXX',
+    server: {
+      url: 'http://localhost:5678/webhook/xxxx',
+      method: 'POST',
+      timeoutMs: 600000
+    },
+    response: {
+      type: 'synchronous',
+      supportsImageUpload: false
+    },
+    ui: {
+      placeholder: '请输入命令，例如"下载分享连接的视频：XXXXX"',
+      welcomeMessage: '抖音视频下载智能助手，帮您下载抖音视频内容'
+    }
+  },
+
+];
+```
 
 ### 操作步骤
 
@@ -148,7 +180,7 @@ pnpm run dev
 ## 9. 常见问题
 
 - **n8n 无法访问或未启动**  
-  请确认 n8n 服务已运行，并确保 `xiaohongshuwebhook.json` 已导入且激活。  
+  请确认 n8n 服务已运行，并确保 `dymcp.json` 已导入且激活。  
 
 - **Model 节点报错或无法调用**  
   检查 n8n 的模型节点中是否填写正确的 API Key。  
