@@ -1,7 +1,8 @@
-# 项目部署与使用说明
+# ai-rms → AI-assisted Requirements Management System
+
+项目部署与使用说明
 
 本项目集成了 **任务管理系统**、**智能体服务** 与 **n8n 自动化流程**，用于统一管理用户需求、人工任务及智能创作流程。
-ai-rms → AI-assisted Requirements Management System
 
 ---
 
