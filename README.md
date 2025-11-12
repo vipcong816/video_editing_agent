@@ -1,4 +1,4 @@
-# ai-rms → AI-assisted Requirements Management System
+# ai-rms (AI-assisted Requirements Management System)
 
 项目部署与使用说明
 
