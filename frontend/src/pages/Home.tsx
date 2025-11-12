@@ -5,7 +5,7 @@ import Banner from "../components/Banner";
 import CategoryTabs from "../components/CategoryTabs";
 import AgentList from "../components/AgentList";
 import { useTheme } from "../hooks/useTheme";
-import { popularAgents, trendingAgents } from "../lib/mockData";
+import { popularAgents } from "../lib/mockData";
 import { useAuth } from "../contexts/authContext";
 import { authApiConfig, getRoleConfig, shouldShowElement } from "../lib/authConfig";
 import { toast } from "sonner";
@@ -152,9 +152,9 @@ export default function Home() {
                       className="w-32 h-32 rounded-full bg-purple-100 flex items-center justify-center mb-6">
                       <i className="fas fa-robot text-purple-500 text-6xl"></i>
                   </div>
-                  <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
-                    欢迎来到智能剪辑<span style={{fontSize: "1.5rem"}}>平台</span><br/>
-                  </h1>
+                   <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+                     欢迎来到智能应用<span style={{fontSize: "1.5rem"}}>平台</span><br/>
+                   </h1>
                   <p className="text-gray-600 dark:text-gray-400 text-center max-w-md mb-8">
                     登录后即可体验我们的智能体服务，获取个性化的AI助手支持
                   </p>
@@ -183,13 +183,13 @@ export default function Home() {
                         <div className="relative z-10 text-center">
                           <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-3">探索AI的无限可能</h2>
                           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                            我们的智能体平台集成了最先进的AI技术，为您提供全方位的智能服务体验。从视频剪辑到内容创作，从图像处理到智能对话，满足您的各种需求。
+                           我们的智能应用平台集成了最先进的AI技术，为您提供全方位的智能服务体验。从工作效率提升到创意生成，从内容处理到智能对话，满足您在不同场景下的各种需求。
                           </p>
                         </div>
                       </div>
                       
-                       <AgentList title="热门" agents={popularAgents} showMore={true} />
-                      
+                        <AgentList title="热门应用" agents={popularAgents} showMore={true} />
+                       
                       {/* 添加更多图像元素 - 底部装饰 */}
                       <div className="mt-12 mb-8 relative">
                         <img 

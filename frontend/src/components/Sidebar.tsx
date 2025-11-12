@@ -69,11 +69,11 @@ const serviceItems = [{
 const Sidebar: React.FC = () => {
     return (
         <div className="w-56 h-screen bg-white dark:bg-gray-800 shadow-lg flex flex-col p-4 relative overflow-hidden">
-            {/* 背景装饰 - 剪辑相关的图形元素 */}
+            {/* 背景装饰 - 通用图形元素 */}
             <div className="absolute -right-20 -top-20 w-64 h-64 bg-blue-50 dark:bg-blue-900/10 rounded-full blur-3xl"></div>
             <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-purple-50 dark:bg-purple-900/10 rounded-full blur-3xl"></div>
             
-            {/* 剪辑相关的装饰元素 - 顶部 */}
+            {/* 科技感装饰元素 - 顶部 */}
             <div className="absolute top-0 left-0 w-full flex justify-around pt-2 pointer-events-none">
                 {[...Array(5)].map((_, i) => (
                     <div key={i} className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 animate-pulse" style={{ animationDelay: `${i * 0.2}s` }}></div>
@@ -85,7 +85,7 @@ const Sidebar: React.FC = () => {
                     <div className="w-8 h-8 rounded-md bg-blue-500 flex items-center justify-center">
                         <span className="text-white font-bold">文</span>
                     </div>
-                    <h1 className="text-xl font-bold text-gray-800 dark:text-white">智能平台</h1>
+                    <h1 className="text-xl font-bold text-gray-800 dark:text-white">智能应用平台</h1>
                 </div>
                 
                 <h2 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2 px-3">主要功能</h2>
@@ -139,7 +139,7 @@ const Sidebar: React.FC = () => {
                 </div>
             </div>
             
-            {/* 剪辑相关的装饰元素 - 底部 */}
+            {/* 科技感装饰元素 - 底部 */}
             <div className="absolute bottom-20 left-0 w-full flex justify-around pointer-events-none">
                 {[...Array(5)].map((_, i) => (
                     <div key={i} className="w-1 h-1 rounded-full bg-gradient-to-r from-purple-400 to-pink-500" style={{ opacity: 0.7 - i * 0.1 }}></div>
@@ -152,9 +152,9 @@ const Sidebar: React.FC = () => {
                     className="flex items-center gap-2 px-3 py-2 rounded-md bg-purple-100 text-purple-600 dark:bg-purple-900 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors group"
                 >
                     <div className="w-5 h-5 rounded-md bg-purple-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <i className="fas fa-cut text-white text-xs"></i>
+                        <i className="fas fa-th-large text-white text-xs"></i>
                     </div>
-                    <span>剪辑空间</span>
+                    <span>应用空间</span>
                 </Link>
             </div>
         </div>
